@@ -1,0 +1,57 @@
+﻿@model IEnumerable<DataLayer.TSTOrderStatus>
+
+@{
+    ViewBag.Title = "Order Status";
+}
+
+
+
+
+<div class="box" style="overflow-x:auto;">
+    <h2 class="text-center headingHeader">@ViewBag.Title</h2>
+    <hr />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @if (User.IsInRole("Owner"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.TicketStatusID })
+                    }
+                     |
+                    @Html.ActionLink("Details", "Details", new { id = item.TicketStatusID }) |
+                    @if (User.IsInRole("Owner"))
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.TicketStatusID })
+                    }
+                    
+                </td>
+            </tr>
+        }
+
+    </table>
+    @if (User.IsInRole("Owner"))
+    {
+        @Html.ActionLink("Create New", "Create")
+    }
+    <p>
+        @Html.ActionLink("Back To Orders", "Index", "TSTOrders")
+    </p>
+</div>

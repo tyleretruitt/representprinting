@@ -1,0 +1,63 @@
+﻿@model IEnumerable<DataLayer.TSTDepartment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+    
+
+
+
+
+<div class="box" style="overflow-x:auto;">
+    <h2 class="headingHeader text-center">Departments</h2>
+    <hr />
+    <table class="table">
+        
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.DepartmentID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.DepartmentID }) |
+                    @if (item.TSTEmployees.Count == 0)
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.DepartmentID })
+                    }
+                    else
+                    {
+                        <span style="font-weight:700; color:red; font-style:italic">In Use</span>
+                    }
+
+
+
+
+                </td>
+            </tr>
+        }
+        
+    </table>
+    @Html.ActionLink("Create New", "Create")
+</div>

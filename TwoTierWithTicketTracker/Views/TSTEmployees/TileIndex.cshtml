@@ -1,0 +1,228 @@
+﻿@model IEnumerable<DataLayer.TSTEmployee>
+
+@{
+    ViewBag.Title = "All Current Employees";
+}
+<style>
+        /*Small Data*/
+        .smallData {
+            /*width: 31%;*/ /*width of the container*/
+            width: 260px;
+            float: left; /*this is what creates the tiling effect*/
+            text-align: center;
+            border: 2px solid #3D3D3D;
+            border-radius: 1em; /*Rounded Corners*/
+            padding: .75em; /*push content inside off of the rounded corner*/
+            box-shadow: 2px 2px #3D3D3D;
+            /*must define the height or they will not tile correctly - Use the inspector
+    to find the height of your tallest data and use that height.*/
+            height: 427px;
+            /*margin is the space between. Remember these are tiled so .5em around EACH
+    structure is 1em (.5em on the right of one div + .5em on the left of the next,
+    same for top and bottom.)*/
+            margin: .5em .5em;
+            /*background-color: #F18912; /*Centriq Orange*/
+            color: black;
+        }
+
+        /*buttons in their on div at the bottom of the structure.*/
+        .smallDataFooterLeft {
+            float: left;
+            text-align: left;
+            width: 49%;
+            margin-bottom: 1em;
+        }
+
+        .smallDataFooterRight {
+            margin-left: 50%;
+            text-align: right;
+            margin-bottom: 1em;
+        }
+
+        .smallDataContent {
+            min-height: 150px;
+        }
+</style>
+
+
+
+<div class="box">
+    <h2 class="text-center">@ViewBag.Title</h2>
+    <hr />
+    <p>
+        @Html.ActionLink("Add an Employee", "Create")
+    </p>
+    <p>
+        @Html.ActionLink("Back To Employee List", "Index")
+    </p>
+    <p>
+        @Html.ActionLink("Show All Employees", "TileIndexWithAllEmployees")
+    </p>
+    @foreach (var item in Model)
+    {
+        var backgroundcolor = "rgba(49, 112, 143, 0.37)";
+        if (item.EmpStatusID == 3)
+        {
+            backgroundcolor = "rgba(248, 19, 19, 0.5)";
+        }
+        else if (item.EmpStatusID == 2)
+        {
+            backgroundcolor = "rgba(49, 129, 233, 0.4)";
+        }
+        else if (item.EmpStatusID == 1)
+        {
+            backgroundcolor = "rgba(79, 100, 103, 0.50)";
+        }
+        else
+        {
+            backgroundcolor = "rgba(57, 255, 80, 0.7);";
+        }
+
+        <div class="smallData col-lg-4" style="background-color: @backgroundcolor">
+            <div class="smallDataContent">
+                Badge No. @Html.DisplayFor(modelItem => item.EmployeeID)<br />
+                <img class="img-circle" style="height:200px; width:200px;" src="@Url.Content("~/Content/img/employeephotos/"
+                     + item.EmpPhoto)" alt="" /><br />
+                @Html.DisplayFor(modelItem => item.LName) @Html.DisplayFor(modelItem => item.FName)<br />
+                @Html.DisplayNameFor(model => model.HireDate): @Html.DisplayFor(modelItem => item.HireDate)<br />
+                @Html.DisplayNameFor(model => model.SeparationDate): @Html.DisplayFor(modelItem => item.SeparationDate)<br />
+                @Html.DisplayNameFor(model => model.Salary): @Html.DisplayFor(modelItem => item.Salary)<br />
+                @Html.DisplayNameFor(model => model.JobTitle): @Html.DisplayFor(modelItem => item.JobTitle)<br />
+                @*Badge No. @Html.DisplayFor(modelItem => item.EmployeeID)<br />*@
+                Employee Status: @Html.DisplayFor(modelItem => item.TSTEmployeeStatus.EmployeeStatusName)
+
+            </div>
+            <div class="smallDataFooterLeft">@Html.ActionLink("Details", "Details", new { id = item.EmployeeID })</div>
+            <div class="smallDataFooterRight">@Html.ActionLink("Edit", "Edit", new { id = item.EmployeeID })</div>
+            @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeID })
+            <div class="clearfix"></div>
+        </div>
+
+    }
+
+</div>
+<div class="clear"></div>
+
+    <!-- #region Commented out original table -->
+    @*<table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HireDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SeparationDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Salary)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address1)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address2)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.State)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Zip)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmpPhoto)
+                </th>
+                <th>
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TSTDepartment.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TSTEmployeeStatus.EmployeeStatusName)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address2)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.State)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Zip)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmpPhoto)
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TSTDepartment.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TSTEmployeeStatus.EmployeeStatusName)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.EmployeeID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeID })
+                    </td>
+                </tr>
+            }
+
+        </table>*@
+
+<!-- #endregion -->
+   

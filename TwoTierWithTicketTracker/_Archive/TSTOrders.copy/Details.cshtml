@@ -1,0 +1,102 @@
+﻿@model DataLayer.TSTOrder
+
+@{
+    ViewBag.Title = " Order Details";
+}
+<div class="box" style="overflow-x:auto;">
+    <h2 class="headingHeader text-center">Order Details</h2>
+
+    <div>
+
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.TroubleDescription)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TroubleDescription)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.StartDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Subject)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Subject)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Picture)
+                
+            </dt>
+
+            <dd>
+                @*@Html.DisplayFor(model => model.Picture)*@
+                <img src="@Url.Content("~/Content/img/OrderImages/"
+                         + Model.Picture)" alt="" width="150" />
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FinshedDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FinshedDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TSTEmployee.FName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TSTEmployee.FName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TSTEmployee1.FName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TSTEmployee1.FName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TSTOrderPriority.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TSTOrderPriority.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TSTOrderStatus.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TSTOrderStatus.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TSTOrderType.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TSTOrderType.Name)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit Order", "Edit", null, new { id = Model.TicketID }, new { @class = "btn btn-danger" }) 
+        @Html.ActionLink("Back To Orders", "Index", null , new { @class="btn btn-primary"})
+    </p>
+</div>

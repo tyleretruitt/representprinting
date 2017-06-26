@@ -1,0 +1,62 @@
+﻿@model DataLayer.TSTOrder
+
+@{
+    ViewBag.Title = "Order Details";
+}
+<div class="box" style="overflow-x:auto">
+    <h2 class="text-center">@ViewBag.Title</h2>
+    <hr />
+
+    <div class="text-center">
+        <img src="@Url.Content("~/Content/img/OrderImages/"
+                         + Model.Picture)" alt="" style="border-radius:50%; height:200px; width:200px;" />
+
+
+        <p>@Html.DisplayNameFor(model => model.TroubleDescription): @Html.DisplayFor(model => model.TroubleDescription)</p>
+        <p>@Html.DisplayNameFor(model => model.StartDate): @Html.DisplayFor(model => model.StartDate)</p>
+        <p>@Html.DisplayNameFor(model => model.Subject): @Html.DisplayFor(model => model.Subject)</p>
+        <p>Finished Date: @Html.DisplayFor(model => model.FinshedDate)</p>
+        <p>@Html.DisplayNameFor(model => model.Quantity): @Html.DisplayFor(model => model.Quantity)</p>
+        <p>Submitted By: @Html.DisplayFor(model => model.TSTEmployee.FName) @Html.DisplayFor(model => model.TSTEmployee.LName)</p>
+        <p>Printer: @Html.DisplayFor(model => model.TSTEmployee1.FName) @Html.DisplayFor(model => model.TSTEmployee1.LName)</p>
+        <p>@Html.DisplayNameFor(model => model.TSTOrderPriority.Name): @Html.DisplayFor(model => model.TSTOrderPriority.Name)</p>
+        <p>@Html.DisplayNameFor(model => model.TSTOrderStatus.Name): @Html.DisplayFor(model => model.TSTOrderStatus.Name)</p>
+        <p>@Html.DisplayNameFor(model => model.TSTOrderType.Name): @Html.DisplayFor(model => model.TSTOrderType.Name)</p>
+
+        
+
+    </div>
+    
+
+    <h3 class="text-center">Shop Notes</h3>
+    @*Loop through any notes for this ticket*@
+    @if (Model.TSTShopNotes.Count > 0)
+    {
+        foreach (var note in Model.TSTShopNotes)
+        {
+            <p class="text-center">
+                @note.Notation by <strong>@note.TSTEmployee.FName @note.TSTEmployee.LName</strong>
+                on <strong>@string.Format("{0:g}", note.NotationDate)</strong>
+            </p>
+            <hr />
+        }
+    }
+    else
+    {
+        <p>
+            <strong><em>No notes exist for this order.</em></strong>
+        </p>
+    }
+    @if (User.IsInRole("Owner") || User.IsInRole("Manager"))
+    {
+        <p>
+            @Html.ActionLink("Edit Order", "Edit", null, new { id = Model.TicketID }, new { @class = "btn btn-danger" })
+
+        </p>
+    }
+    <p>
+        @Html.ActionLink("Back To Orders", "Index", null, new { @class = "btn btn-primary" })
+    </p>
+
+</div>
+

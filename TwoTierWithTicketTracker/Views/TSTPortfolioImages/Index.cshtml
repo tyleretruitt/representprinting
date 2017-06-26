@@ -1,0 +1,35 @@
+﻿@model IEnumerable<DataLayer.TSTPortfolioImage>
+
+@{
+    ViewBag.Title = "Portfolio";
+}
+<div class="box">
+    <h2 class="text-center">Some Prints We've Done</h2>
+    <!--Only users in the "owner" or "manager" role can create can image-->
+    @if (User.IsInRole("Owner") || User.IsInRole("Manager"))
+    {
+        <p>
+            @Html.ActionLink("Add An Image", "Create")
+        </p>
+    }
+
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-3 col-md-3 col-xs-6 thumb">
+            <a class="thumbnail" href="@Url.Content("~/Content/img/UploadedImages/" +item.Image)" target="_blank" data-featherlight="image">
+                <img id="imageFit" class="img-responsive" src="@Url.Content("~/Content/img/UploadedImages/" +item.Image)" alt="">
+            </a>
+
+            <!--Only users in the "owner" or "Manager" role can edit images-->
+            @if (User.IsInRole("Owner") || User.IsInRole("Manager"))
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = item.ImageID })
+                
+                @Html.ActionLink("Delete", "Delete", new { id = item.ImageID })
+            }
+
+            
+        </div>
+    }
+    <div class="clear"></div>
+</div>

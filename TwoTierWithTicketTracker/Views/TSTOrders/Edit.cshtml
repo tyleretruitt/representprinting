@@ -1,0 +1,197 @@
+﻿@model DataLayer.TSTOrder
+
+@{
+    ViewBag.Title = "Edit Order";
+}
+<div class="box">
+    <h2 class="text-center">Assign/@ViewBag.Title</h2>
+
+
+    @using (Html.BeginForm("Edit", "TSTOrders", FormMethod.Post,
+        new { @enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            
+            @Html.HiddenFor(model => model.Picture)
+            
+            @Html.HiddenFor(model => model.StartDate)
+            @Html.HiddenFor(model => model.SubmittedByID)
+            @Html.HiddenFor(model => model.Subject)
+            @Html.HiddenFor(model => model.TicketID)
+            
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TroubleDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TroubleDescription, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TroubleDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TicketStatusID, "Ticket Status", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("TicketStatusID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TicketStatusID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.SubmittedByID, "SubmittedByID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("SubmittedByID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SubmittedByID, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TechID, "Printer", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("TechID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TechID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Picture, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input type="file" name="prodImage" />
+                    @*@Html.EditorFor(model => model.Picture, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.ValidationMessageFor(model => model.Picture, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PriorityID, "Priority", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("PriorityID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PriorityID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.OrderTypeID, "Order Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("OrderTypeID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.OrderTypeID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.FinshedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FinshedDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FinshedDate, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-danger" />
+                    @Html.ActionLink("Back to Orders", "Index", null, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+        </div>
+    }
+    <span class="bold">Shop Notes</span>
+
+    <div id="notes">
+        @if (Model.TSTShopNotes.Count > 0)
+        {
+            foreach (var note in Model.TSTShopNotes)
+            {
+                <p>
+                    @note.Notation by <strong>@note.TSTEmployee.FName @note.TSTEmployee.LName</strong>
+                    on <strong>@string.Format("{0:g}", note.NotationDate)</strong>
+                </p>
+                <hr />
+            }
+        }
+        else
+        {
+            <p>
+                <strong><em>No notes exist for this order.</em></strong>
+            </p>
+        }
+    </div>
+    <div id="addNote">
+        <h4>Add Tech Note:</h4>
+        <p><textarea id="noteText"></textarea></p>
+        <p><input type="button" value="Add Note" id="btnAddNote"
+                  class="btn btn-success" /></p>
+    </div>
+
+    <div>
+        
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(function () {
+            $("#btnAddNote").click(function () {
+                //quick text
+                //console.log("You just clicked the button");
+
+                //get the value from the notes being entered and assign
+                //to a variable
+                var note = $("#noteText").val();
+
+                //when adding the note (during the asynch call), add this
+                //note information to the notes div (display) also clear
+                //the notes textarea
+                $.ajax({
+                    //url
+                    url: "/TSTOrders/AddTechNote?ticketId=@Model.TicketID&note="
+                    + note, success: function (data)
+                    {
+                        //display the new note info at the bottom of the
+                        //notes div.  these is no formatting here, UI
+                        //is unaware of what is happening
+
+                        $("#notes").append("<p>" + data.TechNotes +
+                            " by " + data.Tech + " on" + data.Date
+                            + "</p>");
+
+                        //cler the notes textArea
+                        $("#noteText").val("");
+
+                    }
+                });
+
+            });
+        });
+    </script>
+
+
+}

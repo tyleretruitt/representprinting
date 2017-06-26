@@ -1,0 +1,46 @@
+﻿@model IEnumerable<DataLayer.TSTEmployeeStatus>
+
+@{
+    ViewBag.Title = "Employee Status";
+}
+
+
+
+
+<div class="box" style="overflow-x:auto;">
+    <h2 class="headingHeader text-center">@ViewBag.Title</h2>
+    <hr />
+    <p style="display:inline">@Html.ActionLink("Create New", "Create")</p>
+    <p style="float:right;">@Html.ActionLink("Back To Employees","Index", "TSTEmployees")</p>
+    <table class="table">
+        
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeStatusName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeStatusName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeStatusID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.EmployeeStatusID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeStatusID })
+                </td>
+            </tr>
+        }
+
+    </table>
+    
+</div>

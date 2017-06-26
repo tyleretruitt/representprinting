@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c8329b4291614797a69bb9c20e2066a0" Name="Diagram1">
+        <EntityTypeShape EntityType="tstModel.TSTDepartment" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="tstModel.TSTEmployee" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="tstModel.TSTEmployeeStatus" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tstModel.TSTOrderPriority" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="tstModel.TSTOrderStatus" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tstModel.TSTOrderType" Width="1.5" PointX="3" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="tstModel.TSTShopNote" Width="1.5" PointX="7.5" PointY="3.5" IsExpanded="true" />
+        <AssociationConnector Association="tstModel.FK_TSTEmployees_TSTDepartments" ManuallyRouted="false" />
+        <AssociationConnector Association="tstModel.FK_TSTEmployees_TSTEmployeeStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="tstModel.FK_TSTTechNotes_TSTEmployees" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="tstModel.TSTOrder" Width="1.5" PointX="5.25" PointY="6.25" />
+        <AssociationConnector Association="tstModel.FK_TSTOrders_TSTEmployees" />
+        <AssociationConnector Association="tstModel.FK_TSTOrders_TSTEmployees1" />
+        <AssociationConnector Association="tstModel.FK_TSTOrders_TSTOrderPriorities" />
+        <AssociationConnector Association="tstModel.FK_TSTOrders_TSTOrderStatuses" />
+        <AssociationConnector Association="tstModel.FK_TSTOrders_TSTOrderTypes" />
+        <AssociationConnector Association="tstModel.FK_TSTTechNotes_TSTTickets" />
+        <EntityTypeShape EntityType="tstModel.TSTPortfolioImage" Width="1.5" PointX="5.375" PointY="0.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

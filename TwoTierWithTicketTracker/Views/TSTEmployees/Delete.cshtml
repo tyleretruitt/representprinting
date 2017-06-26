@@ -1,0 +1,157 @@
+﻿@model DataLayer.TSTEmployee
+
+@{
+    ViewBag.Title = "Delete Employee";
+}
+<div class="box" style="overflow-x:auto;">
+    <h2 class="headingHeader text-center">Toggle Employee Status?</h2>
+
+    
+    <div>
+
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                
+            </dt>
+
+            <dd>
+                <img src="@Url.Content("~/Content/img/employeephotos/" + Model.EmpPhoto)" width="150" />
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.FName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.HireDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HireDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SeparationDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SeparationDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Salary)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Salary)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Address1)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Address1)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Address2)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Address2)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.City)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.City)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.State)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.State)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Zip)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Zip)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Phone)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Phone)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            
+
+            <dt>
+                @Html.DisplayNameFor(model => model.JobTitle)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.JobTitle)
+            </dd>
+
+            
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TSTDepartment.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TSTDepartment.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TSTEmployeeStatus.EmployeeStatusName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TSTEmployeeStatus.EmployeeStatusName)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Toggle Employee Status" class="btn btn-danger" />
+                @Html.ActionLink("List of Employees", "Index", null, new { @class = "btn btn-primary" })
+            </div>
+        }
+    </div>
+</div>

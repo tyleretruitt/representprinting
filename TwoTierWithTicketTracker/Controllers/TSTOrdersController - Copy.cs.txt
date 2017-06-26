@@ -1,0 +1,266 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using DataLayer;
+
+namespace TwoTierWithTicketTracker.Controllers
+{
+    public class TSTOrdersController : Controller
+    {
+        private tstEntities db = new tstEntities();
+
+        // GET: TSTOrders
+        public ActionResult Index()
+        {
+            var tSTOrders = db.TSTOrders
+                .Include(t => t.TSTEmployee)
+                .Include(t => t.TSTEmployee1)
+                .Include(t => t.TSTOrderPriority)
+                .Include(t => t.TSTOrderStatus)
+                .Include(t => t.TSTOrderType);
+            return View(tSTOrders.Where(o => o.TicketStatusID == 2).ToList());
+            //need to make sure that inactive orders do not show
+
+            //toggle functionality added here later(more than likely)
+
+        }
+
+        // GET: TSTOrders/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            TSTOrder tSTOrder = db.TSTOrders.Find(id);
+            if (tSTOrder == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tSTOrder);
+        }
+
+        // GET: TSTOrders/Create
+        public ActionResult Create()
+        {
+            ViewBag.SubmittedByID = new SelectList(db.TSTEmployees, "EmployeeID", "FName");
+            ViewBag.TechID = new SelectList(db.TSTEmployees, "EmployeeID", "FName");
+            ViewBag.PriorityID = new SelectList(db.TSTOrderPriorities, "PriorityID", "Name");
+            ViewBag.TicketStatusID = new SelectList(db.TSTOrderStatuses, "TicketStatusID", "Name");
+            ViewBag.OrderTypeID = new SelectList(db.TSTOrderTypes, "OrderTypeID", "Name");
+            return View();
+        }
+
+        // POST: TSTOrders/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "TicketID,TicketStatusID,TroubleDescription,StartDate,SubmittedByID,TechID,Subject,Picture,PriorityID,OrderTypeID,FinshedDate")]
+        TSTOrder tSTOrder, HttpPostedFileBase prodImage)
+        {
+            if (ModelState.IsValid)
+            {
+
+
+
+                #region File Upload Create
+
+                string imageName = "NoImage.gif";
+
+                if (prodImage != null)
+                {
+                    imageName = prodImage.FileName;
+
+                    string ext = imageName.Substring(
+                        imageName.LastIndexOf('.'));
+
+                    string[] goodExts = new string[]
+                    {
+                        ".gif", ".jpg", ".png", ".bmp", ".jpeg"
+                    };
+                    if (goodExts.Contains(ext))
+                    {
+                        imageName = Guid.NewGuid() + ext;
+
+                        //save it to the webserver 
+                        //(website/Content/Images/ProductImages)
+                        prodImage.SaveAs(Server.MapPath(
+                            "~/Content/img/OrderImages/"
+                            + imageName));
+                    }
+                    else
+                    {
+                        imageName = "NoImage.gif";
+                    }
+                }
+                tSTOrder.Picture = imageName;
+
+                #endregion
+                #region Automatic Order Status Assignment
+                tSTOrder.TicketStatusID = 2;
+                #endregion
+                #region Automatic date assignment
+                tSTOrder.StartDate = DateTime.Now;//needs to be parsed i believe
+                #endregion
+                #region Notes can only be submitted by a manager
+                
+
+                #endregion
+
+                
+                #region Only a printer can be assigned an order
+
+                
+
+                #endregion
+
+                db.TSTOrders.Add(tSTOrder);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+
+            }
+
+            
+
+
+
+            ViewBag.SubmittedByID = new SelectList(db.TSTEmployees, "EmployeeID", "FName", tSTOrder.SubmittedByID);
+            ViewBag.TechID = new SelectList(db.TSTEmployees, "EmployeeID", "FName", tSTOrder.TechID);
+            ViewBag.PriorityID = new SelectList(db.TSTOrderPriorities, "PriorityID", "Name", tSTOrder.PriorityID);
+            ViewBag.TicketStatusID = new SelectList(db.TSTOrderStatuses, "TicketStatusID", "Name", tSTOrder.TicketStatusID);
+            ViewBag.OrderTypeID = new SelectList(db.TSTOrderTypes, "OrderTypeID", "Name", tSTOrder.OrderTypeID);
+            return View(tSTOrder);
+        }
+
+        // GET: TSTOrders/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            TSTOrder tSTOrder = db.TSTOrders.Find(id);
+            if (tSTOrder == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.SubmittedByID = new SelectList(db.TSTEmployees, "EmployeeID", "FName", tSTOrder.SubmittedByID);
+            ViewBag.TechID = new SelectList(db.TSTEmployees, "EmployeeID", "FName", tSTOrder.TechID);
+            ViewBag.PriorityID = new SelectList(db.TSTOrderPriorities, "PriorityID", "Name", tSTOrder.PriorityID);
+            ViewBag.TicketStatusID = new SelectList(db.TSTOrderStatuses, "TicketStatusID", "Name", tSTOrder.TicketStatusID);
+            ViewBag.OrderTypeID = new SelectList(db.TSTOrderTypes, "OrderTypeID", "Name", tSTOrder.OrderTypeID);
+            return View(tSTOrder);
+        }
+
+        // POST: TSTOrders/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "TicketID,TicketStatusID,TroubleDescription,StartDate,SubmittedByID,TechID,Subject,Picture,PriorityID,OrderTypeID,FinshedDate")]
+        TSTOrder tSTOrder, HttpPostedFileBase prodImage)
+        {
+            if (ModelState.IsValid)
+            {
+                #region File Upload Edit
+
+                string imageName = "NoImage.gif";
+
+                if (prodImage != null)
+                {
+                    imageName = prodImage.FileName;
+
+                    string ext = imageName.Substring(
+                        imageName.LastIndexOf('.'));
+
+                    string[] goodExts = new string[]
+                    {
+                        ".gif", ".jpg", ".png", ".bmp", ".jpeg"
+                    };
+                    if (goodExts.Contains(ext))
+                    {
+                        imageName = Guid.NewGuid() + ext;
+
+                        //save it to the webserver 
+                        //(website/Content/Images/ProductImages)
+                        prodImage.SaveAs(Server.MapPath(
+                            "~/Content/img/OrderImages/"
+                            + imageName));
+                    }
+
+                    tSTOrder.Picture = imageName;
+                    //else
+                    //{
+                    //    imageName = "NoImage.gif";
+                    //}
+                }
+
+
+                #endregion
+                db.Entry(tSTOrder).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.SubmittedByID = new SelectList(db.TSTEmployees, "EmployeeID", "FName", tSTOrder.SubmittedByID);
+            ViewBag.TechID = new SelectList(db.TSTEmployees, "EmployeeID", "FName", tSTOrder.TechID);
+            ViewBag.PriorityID = new SelectList(db.TSTOrderPriorities, "PriorityID", "Name", tSTOrder.PriorityID);
+            ViewBag.TicketStatusID = new SelectList(db.TSTOrderStatuses, "TicketStatusID", "Name", tSTOrder.TicketStatusID);
+            ViewBag.OrderTypeID = new SelectList(db.TSTOrderTypes, "OrderTypeID", "Name", tSTOrder.OrderTypeID);
+            return View(tSTOrder);
+        }
+
+        // GET: TSTOrders/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            TSTOrder tSTOrder = db.TSTOrders.Find(id);
+            if (tSTOrder == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tSTOrder);
+        }
+
+        // POST: TSTOrders/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            TSTOrder tSTOrder = db.TSTOrders.Find(id);
+            //db.TSTOrders.Remove(tSTOrder);
+
+            #region soft delete
+            if (tSTOrder.TicketStatusID == 4)
+            {
+                tSTOrder.TicketStatusID = 2;
+            }
+            else
+            {
+                tSTOrder.TicketStatusID = 4;
+            }
+
+            #endregion
+
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+}

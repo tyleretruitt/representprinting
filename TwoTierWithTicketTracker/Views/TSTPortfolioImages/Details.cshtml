@@ -1,0 +1,19 @@
+﻿@model DataLayer.TSTPortfolioImage
+
+@{
+    ViewBag.Title = "Details";
+}
+<div class="box">
+    <h2 class="text-center">@ViewBag.Title</h2>
+
+    <div>
+        <hr />
+        <img src="@Url.Content("~/Content/img/OrderImages/" + Model.Image)" alt="" width="300">
+        <h3>Are you sure you would like to Delete This Image?</h3>
+        
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ImageID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>

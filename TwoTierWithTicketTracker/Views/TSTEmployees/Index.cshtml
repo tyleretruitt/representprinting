@@ -1,0 +1,99 @@
+﻿@model IEnumerable<DataLayer.TSTEmployee>
+
+@{
+    ViewBag.Title = "Employees";
+}
+
+
+
+
+<div class="box" style="overflow-x:auto;">
+    <h2 class="headingHeader text-center">Employees</h2>
+    <hr />
+    <p style="display:inline;">
+
+        @if (User.IsInRole("HR") || User.IsInRole("Owner"))
+        {
+            @Html.ActionLink("Show Inactive Employees", "InActiveEmps", "TSTEmployees")
+        }
+
+
+
+    </p>
+    <p style="float:right;">
+        @if (User.IsInRole("HR") || User.IsInRole("Owner"))
+        {
+            @Html.ActionLink("Employee Statuses", "Index", "TSTEmployeeStatus")
+        }
+
+    </p>
+    <p>
+        @if (User.IsInRole("HR") || User.IsInRole("Owner"))
+        {
+            @Html.ActionLink("Tile View", "TileIndex", "TSTEmployees")
+        }
+    </p>
+
+    <table id="myTable" class="table">
+        <thead>
+            <tr>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.FName)
+                        @Html.DisplayNameFor(model => model.LName)*@
+                    Employee
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Phone)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.JobTitle)
+                </th>
+
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LName),
+                        @Html.DisplayFor(modelItem => item.FName)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Phone)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobTitle)
+                    </td>
+
+
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.EmployeeID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @Html.ActionLink("Add An Employee", "Create", null, new { @class = "btn btn-success" })
+</div>
+@section scripts{
+    <script src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+
+}

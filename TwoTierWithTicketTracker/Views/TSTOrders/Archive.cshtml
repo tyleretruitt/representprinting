@@ -1,0 +1,118 @@
+﻿@model DataLayer.TSTOrder
+
+@{
+    ViewBag.Title = "Archive";
+}
+<div class="box">
+    <h2 class="text-center">@ViewBag.Title this order?</h2>
+
+    @*<h3>This is only a soft delete</h3>*@
+    <div>
+
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.TroubleDescription)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TroubleDescription)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.StartDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Subject)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Subject)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Picture)
+            </dt>
+
+            <dd>
+                <img src="@Url.Content("~/Content/img/OrderImages/"
+                         + Model.Picture)" alt="" width="150" />
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FinshedDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FinshedDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Quantity)
+            </dd>
+
+            <dt>
+                @*@Html.DisplayNameFor(model => model.TSTEmployee.FName)*@
+                Submitted By
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TSTEmployee.FName)
+                @Html.DisplayFor(model => model.TSTEmployee.LName)
+            </dd>
+
+            <dt>
+                Printer
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TSTEmployee1.FName)
+                @Html.DisplayFor(model => model.TSTEmployee1.LName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TSTOrderPriority.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TSTOrderPriority.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TSTOrderStatus.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TSTOrderStatus.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TSTOrderType.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TSTOrderType.Name)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Archive" class="btn btn-danger" /> |
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-primary" })
+            </div>
+        }
+    </div>
+</div>
