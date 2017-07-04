@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="tstModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="TSTDepartment">
+    <Key>
+      <PropertyRef Name="DepartmentID" />
+    </Key>
+    <Property Name="DepartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="TSTEmployees" Relationship="Self.FK_TSTEmployees_TSTDepartments" FromRole="TSTDepartments" ToRole="TSTEmployees" />
+  </EntityType>
+  <EntityType Name="TSTEmployee">
+    <Key>
+      <PropertyRef Name="EmployeeID" />
+    </Key>
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DeptID" Type="Int32" Nullable="false" />
+    <Property Name="EmpStatusID" Type="Int32" Nullable="false" />
+    <Property Name="HireDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="SeparationDate" Type="DateTime" Precision="0" />
+    <Property Name="Salary" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Address1" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Address2" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="Zip" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="EmpPhoto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="JobTitle" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TSTDepartment" Relationship="Self.FK_TSTEmployees_TSTDepartments" FromRole="TSTEmployees" ToRole="TSTDepartments" />
+    <NavigationProperty Name="TSTEmployeeStatus" Relationship="Self.FK_TSTEmployees_TSTEmployeeStatus" FromRole="TSTEmployees" ToRole="TSTEmployeeStatuses" />
+    <NavigationProperty Name="TSTShopNotes" Relationship="Self.FK_TSTTechNotes_TSTEmployees" FromRole="TSTEmployees" ToRole="TSTShopNotes" />
+    <NavigationProperty Name="TSTOrders" Relationship="tstModel.FK_TSTOrders_TSTEmployees" FromRole="TSTEmployee" ToRole="TSTOrder" />
+    <NavigationProperty Name="TSTOrders1" Relationship="tstModel.FK_TSTOrders_TSTEmployees1" FromRole="TSTEmployee" ToRole="TSTOrder" />
+  </EntityType>
+  <EntityType Name="TSTEmployeeStatus">
+    <Key>
+      <PropertyRef Name="EmployeeStatusID" />
+    </Key>
+    <Property Name="EmployeeStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeStatusName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TSTEmployees" Relationship="Self.FK_TSTEmployees_TSTEmployeeStatus" FromRole="TSTEmployeeStatuses" ToRole="TSTEmployees" />
+  </EntityType>
+  <EntityType Name="TSTOrderPriority">
+    <Key>
+      <PropertyRef Name="PriorityID" />
+    </Key>
+    <Property Name="PriorityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TSTOrders" Relationship="tstModel.FK_TSTOrders_TSTOrderPriorities" FromRole="TSTOrderPriority" ToRole="TSTOrder" />
+  </EntityType>
+  <EntityType Name="TSTOrderStatus">
+    <Key>
+      <PropertyRef Name="TicketStatusID" />
+    </Key>
+    <Property Name="TicketStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TSTOrders" Relationship="tstModel.FK_TSTOrders_TSTOrderStatuses" FromRole="TSTOrderStatus" ToRole="TSTOrder" />
+  </EntityType>
+  <EntityType Name="TSTOrderType">
+    <Key>
+      <PropertyRef Name="OrderTypeID" />
+    </Key>
+    <Property Name="OrderTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TSTOrders" Relationship="tstModel.FK_TSTOrders_TSTOrderTypes" FromRole="TSTOrderType" ToRole="TSTOrder" />
+  </EntityType>
+  <EntityType Name="TSTShopNote">
+    <Key>
+      <PropertyRef Name="NotationID" />
+    </Key>
+    <Property Name="NotationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Notation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TechID" Type="Int32" Nullable="false" />
+    <Property Name="TicketID" Type="Int32" Nullable="false" />
+    <Property Name="NotationDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="TSTEmployee" Relationship="Self.FK_TSTTechNotes_TSTEmployees" FromRole="TSTShopNotes" ToRole="TSTEmployees" />
+    <NavigationProperty Name="TSTOrder" Relationship="tstModel.FK_TSTTechNotes_TSTTickets" FromRole="TSTShopNote" ToRole="TSTOrder" />
+  </EntityType>
+  <Association Name="FK_TSTEmployees_TSTDepartments">
+    <End Role="TSTDepartments" Type="Self.TSTDepartment" Multiplicity="1" />
+    <End Role="TSTEmployees" Type="Self.TSTEmployee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TSTDepartments">
+        <PropertyRef Name="DepartmentID" />
+      </Principal>
+      <Dependent Role="TSTEmployees">
+        <PropertyRef Name="DeptID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TSTEmployees_TSTEmployeeStatus">
+    <End Role="TSTEmployeeStatuses" Type="Self.TSTEmployeeStatus" Multiplicity="1" />
+    <End Role="TSTEmployees" Type="Self.TSTEmployee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TSTEmployeeStatuses">
+        <PropertyRef Name="EmployeeStatusID" />
+      </Principal>
+      <Dependent Role="TSTEmployees">
+        <PropertyRef Name="EmpStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TSTTechNotes_TSTEmployees">
+    <End Role="TSTEmployees" Type="Self.TSTEmployee" Multiplicity="1" />
+    <End Role="TSTShopNotes" Type="Self.TSTShopNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TSTEmployees">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="TSTShopNotes">
+        <PropertyRef Name="TechID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="tstEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="TSTDepartments" EntityType="Self.TSTDepartment" />
+    <EntitySet Name="TSTEmployees" EntityType="Self.TSTEmployee" />
+    <EntitySet Name="TSTEmployeeStatuses" EntityType="Self.TSTEmployeeStatus" />
+    <EntitySet Name="TSTOrderPriorities" EntityType="Self.TSTOrderPriority" />
+    <EntitySet Name="TSTOrderStatuses" EntityType="Self.TSTOrderStatus" />
+    <EntitySet Name="TSTOrderTypes" EntityType="Self.TSTOrderType" />
+    <EntitySet Name="TSTShopNotes" EntityType="Self.TSTShopNote" />
+    <AssociationSet Name="FK_TSTEmployees_TSTDepartments" Association="Self.FK_TSTEmployees_TSTDepartments">
+      <End Role="TSTDepartments" EntitySet="TSTDepartments" />
+      <End Role="TSTEmployees" EntitySet="TSTEmployees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TSTEmployees_TSTEmployeeStatus" Association="Self.FK_TSTEmployees_TSTEmployeeStatus">
+      <End Role="TSTEmployeeStatuses" EntitySet="TSTEmployeeStatuses" />
+      <End Role="TSTEmployees" EntitySet="TSTEmployees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TSTTechNotes_TSTEmployees" Association="Self.FK_TSTTechNotes_TSTEmployees">
+      <End Role="TSTEmployees" EntitySet="TSTEmployees" />
+      <End Role="TSTShopNotes" EntitySet="TSTShopNotes" />
+    </AssociationSet>
+    <EntitySet Name="TSTOrders" EntityType="tstModel.TSTOrder" />
+    <AssociationSet Name="FK_TSTOrders_TSTEmployees" Association="tstModel.FK_TSTOrders_TSTEmployees">
+      <End Role="TSTEmployee" EntitySet="TSTEmployees" />
+      <End Role="TSTOrder" EntitySet="TSTOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TSTOrders_TSTEmployees1" Association="tstModel.FK_TSTOrders_TSTEmployees1">
+      <End Role="TSTEmployee" EntitySet="TSTEmployees" />
+      <End Role="TSTOrder" EntitySet="TSTOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TSTOrders_TSTOrderPriorities" Association="tstModel.FK_TSTOrders_TSTOrderPriorities">
+      <End Role="TSTOrderPriority" EntitySet="TSTOrderPriorities" />
+      <End Role="TSTOrder" EntitySet="TSTOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TSTOrders_TSTOrderStatuses" Association="tstModel.FK_TSTOrders_TSTOrderStatuses">
+      <End Role="TSTOrderStatus" EntitySet="TSTOrderStatuses" />
+      <End Role="TSTOrder" EntitySet="TSTOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TSTOrders_TSTOrderTypes" Association="tstModel.FK_TSTOrders_TSTOrderTypes">
+      <End Role="TSTOrderType" EntitySet="TSTOrderTypes" />
+      <End Role="TSTOrder" EntitySet="TSTOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TSTTechNotes_TSTTickets" Association="tstModel.FK_TSTTechNotes_TSTTickets">
+      <End Role="TSTOrder" EntitySet="TSTOrders" />
+      <End Role="TSTShopNote" EntitySet="TSTShopNotes" />
+    </AssociationSet>
+    <EntitySet Name="TSTPortfolioImages" EntityType="tstModel.TSTPortfolioImage" />
+  </EntityContainer>
+  <EntityType Name="TSTOrder">
+    <Key>
+      <PropertyRef Name="TicketID" />
+    </Key>
+    <Property Name="TicketID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TicketStatusID" Type="Int32" Nullable="false" />
+    <Property Name="TroubleDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="SubmittedByID" Type="Int32" Nullable="false" />
+    <Property Name="TechID" Type="Int32" />
+    <Property Name="Subject" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Picture" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PriorityID" Type="Int32" Nullable="false" />
+    <Property Name="OrderTypeID" Type="Int32" Nullable="false" />
+    <Property Name="FinshedDate" Type="DateTime" Precision="0" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TSTEmployee" Relationship="tstModel.FK_TSTOrders_TSTEmployees" FromRole="TSTOrder" ToRole="TSTEmployee" />
+    <NavigationProperty Name="TSTEmployee1" Relationship="tstModel.FK_TSTOrders_TSTEmployees1" FromRole="TSTOrder" ToRole="TSTEmployee" />
+    <NavigationProperty Name="TSTOrderPriority" Relationship="tstModel.FK_TSTOrders_TSTOrderPriorities" FromRole="TSTOrder" ToRole="TSTOrderPriority" />
+    <NavigationProperty Name="TSTOrderStatus" Relationship="tstModel.FK_TSTOrders_TSTOrderStatuses" FromRole="TSTOrder" ToRole="TSTOrderStatus" />
+    <NavigationProperty Name="TSTOrderType" Relationship="tstModel.FK_TSTOrders_TSTOrderTypes" FromRole="TSTOrder" ToRole="TSTOrderType" />
+    <NavigationProperty Name="TSTShopNotes" Relationship="tstModel.FK_TSTTechNotes_TSTTickets" FromRole="TSTOrder" ToRole="TSTShopNote" />
+  </EntityType>
+  <Association Name="FK_TSTOrders_TSTEmployees">
+    <End Type="tstModel.TSTEmployee" Role="TSTEmployee" Multiplicity="1" />
+    <End Type="tstModel.TSTOrder" Role="TSTOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TSTEmployee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="TSTOrder">
+        <PropertyRef Name="SubmittedByID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TSTOrders_TSTEmployees1">
+    <End Type="tstModel.TSTEmployee" Role="TSTEmployee" Multiplicity="0..1" />
+    <End Type="tstModel.TSTOrder" Role="TSTOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TSTEmployee">
+        <PropertyRef Name="EmployeeID" />
+      </Principal>
+      <Dependent Role="TSTOrder">
+        <PropertyRef Name="TechID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TSTOrders_TSTOrderPriorities">
+    <End Type="tstModel.TSTOrderPriority" Role="TSTOrderPriority" Multiplicity="1" />
+    <End Type="tstModel.TSTOrder" Role="TSTOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TSTOrderPriority">
+        <PropertyRef Name="PriorityID" />
+      </Principal>
+      <Dependent Role="TSTOrder">
+        <PropertyRef Name="PriorityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TSTOrders_TSTOrderStatuses">
+    <End Type="tstModel.TSTOrderStatus" Role="TSTOrderStatus" Multiplicity="1" />
+    <End Type="tstModel.TSTOrder" Role="TSTOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TSTOrderStatus">
+        <PropertyRef Name="TicketStatusID" />
+      </Principal>
+      <Dependent Role="TSTOrder">
+        <PropertyRef Name="TicketStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TSTOrders_TSTOrderTypes">
+    <End Type="tstModel.TSTOrderType" Role="TSTOrderType" Multiplicity="1" />
+    <End Type="tstModel.TSTOrder" Role="TSTOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TSTOrderType">
+        <PropertyRef Name="OrderTypeID" />
+      </Principal>
+      <Dependent Role="TSTOrder">
+        <PropertyRef Name="OrderTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TSTTechNotes_TSTTickets">
+    <End Type="tstModel.TSTOrder" Role="TSTOrder" Multiplicity="1" />
+    <End Type="tstModel.TSTShopNote" Role="TSTShopNote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TSTOrder">
+        <PropertyRef Name="TicketID" />
+      </Principal>
+      <Dependent Role="TSTShopNote">
+        <PropertyRef Name="TicketID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TSTPortfolioImage">
+    <Key>
+      <PropertyRef Name="ImageID" />
+    </Key>
+    <Property Name="ImageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Image" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

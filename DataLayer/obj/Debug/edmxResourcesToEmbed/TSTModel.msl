@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="tstModelStoreContainer" CdmEntityContainer="tstEntities">
+    <EntitySetMapping Name="TSTDepartments">
+      <EntityTypeMapping TypeName="tstModel.TSTDepartment">
+        <MappingFragment StoreEntitySet="TSTDepartments">
+          <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TSTEmployees">
+      <EntityTypeMapping TypeName="tstModel.TSTEmployee">
+        <MappingFragment StoreEntitySet="TSTEmployees">
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="FName" ColumnName="FName" />
+          <ScalarProperty Name="LName" ColumnName="LName" />
+          <ScalarProperty Name="DeptID" ColumnName="DeptID" />
+          <ScalarProperty Name="EmpStatusID" ColumnName="EmpStatusID" />
+          <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+          <ScalarProperty Name="SeparationDate" ColumnName="SeparationDate" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="Address2" ColumnName="Address2" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="EmpPhoto" ColumnName="EmpPhoto" />
+          <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TSTEmployeeStatuses">
+      <EntityTypeMapping TypeName="tstModel.TSTEmployeeStatus">
+        <MappingFragment StoreEntitySet="TSTEmployeeStatuses">
+          <ScalarProperty Name="EmployeeStatusID" ColumnName="EmployeeStatusID" />
+          <ScalarProperty Name="EmployeeStatusName" ColumnName="EmployeeStatusName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TSTOrderPriorities">
+      <EntityTypeMapping TypeName="tstModel.TSTOrderPriority">
+        <MappingFragment StoreEntitySet="TSTOrderPriorities">
+          <ScalarProperty Name="PriorityID" ColumnName="PriorityID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TSTOrderStatuses">
+      <EntityTypeMapping TypeName="tstModel.TSTOrderStatus">
+        <MappingFragment StoreEntitySet="TSTOrderStatuses">
+          <ScalarProperty Name="TicketStatusID" ColumnName="TicketStatusID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TSTOrderTypes">
+      <EntityTypeMapping TypeName="tstModel.TSTOrderType">
+        <MappingFragment StoreEntitySet="TSTOrderTypes">
+          <ScalarProperty Name="OrderTypeID" ColumnName="OrderTypeID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TSTShopNotes">
+      <EntityTypeMapping TypeName="tstModel.TSTShopNote">
+        <MappingFragment StoreEntitySet="TSTShopNotes">
+          <ScalarProperty Name="NotationID" ColumnName="NotationID" />
+          <ScalarProperty Name="Notation" ColumnName="Notation" />
+          <ScalarProperty Name="TechID" ColumnName="TechID" />
+          <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+          <ScalarProperty Name="NotationDate" ColumnName="NotationDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TSTOrders">
+      <EntityTypeMapping TypeName="tstModel.TSTOrder">
+        <MappingFragment StoreEntitySet="TSTOrders">
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="FinshedDate" ColumnName="FinshedDate" />
+          <ScalarProperty Name="OrderTypeID" ColumnName="OrderTypeID" />
+          <ScalarProperty Name="PriorityID" ColumnName="PriorityID" />
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="TechID" ColumnName="TechID" />
+          <ScalarProperty Name="SubmittedByID" ColumnName="SubmittedByID" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="TroubleDescription" ColumnName="TroubleDescription" />
+          <ScalarProperty Name="TicketStatusID" ColumnName="TicketStatusID" />
+          <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TSTPortfolioImages">
+      <EntityTypeMapping TypeName="tstModel.TSTPortfolioImage">
+        <MappingFragment StoreEntitySet="TSTPortfolioImages">
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="ImageID" ColumnName="ImageID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
